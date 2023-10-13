@@ -92,6 +92,7 @@ void VDF::LookForKey(char c)
         state_ = VDFState::ReadingKey;
     else if (c == '}' && CanPop())
         hierarchy_.pop_back();
+    else if (c == '\n' || c == '\r' || c == '\t' || c == ' ') {}
     else
         throw SyntaxErrorException("VDF: Quote or bracket expected");
 }
@@ -112,6 +113,7 @@ void VDF::LookForValue(char c)
         key_ = "";
         state_ = VDFState::LookingForKey;
     }
+    else if (c == '\n' || c == '\r' || c == '\t' || c == ' ') {}
     else
         throw SyntaxErrorException("VDF: Quote or bracket expected");
 }
